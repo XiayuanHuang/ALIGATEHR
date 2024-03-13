@@ -1,5 +1,5 @@
 # ALIGATEHR
-=========================================
+
 
 ALIGATEHR is a generic framework for learning patient representations, 
 which models predicted family relations using a graph attention network of recurrent neural network (RNN) nodes.
