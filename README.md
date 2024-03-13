@@ -16,4 +16,4 @@ focuses on the sequential order of visits for each patient, without considering 
 
 The  code trains an RNN to predict disease risk of future visit by incorporating family history information infused from first-degree relatives and medical ongology knowledge.
 Two attention-based graphs are built wiht attention layer simultaneously for learning latent patient representaion for each visit. Enventually, the latent patient representation
-of each visit are inputted into RNN for disease risk prediction.
+of each visit is inputted into RNN for disease risk prediction.
