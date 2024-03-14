@@ -16,13 +16,19 @@ class ALIGATEHR(nn.Module):
         super(ALIGATEHR, self).__init__()
         self.dropout = dropout
 
-        self.attentions = [EPedigreesAttentionLayer(nfeat, nhid, dropout=dropout, alpha=alpha, concat=True) for _ in range(nheads)]
+        attentions = [EPedigreesAttentionLayer(nfeat, nhid, dropout=dropout, alpha=alpha, concat=True) for _ in range(nheads)]
         for i, attention in enumerate(self.attentions):
             self.add_module('attention_{}'.format(i), attention)
 
-        self.out_att = EPedigreesAttentionLayer(nhid * nheads, nclass, dropout=dropout, alpha=alpha, concat=False)
+        out_att = EPedigreesAttentionLayer(nhid * nheads, nclass, dropout=dropout, alpha=alpha, concat=False)
 
-        
+        attentions2 = [Ontology(nfeat, nhid, dropout=dropout, alpha=alpha, concat=True) for _ in range(nheads)]
+        for i, attention in enumerate(self.attentions):
+            self.add_module('attention_{}'.format(i), attention)
+
+        out_att2 = Ontology(nhid * nheads, nclass, dropout=dropout, alpha=alpha, concat=False)
+
+        self.attentions = attentions * attentions2
         
     def forward(self, x, adj):
         x = F.dropout(x, self.dropout, training=self.training)
