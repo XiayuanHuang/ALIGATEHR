@@ -54,7 +54,6 @@ class EPedigreesAttentionLayer(nn.Module):
 
 
 class SpecialSpmmFunction(torch.autograd.Function):
-    """Special function for only sparse region backpropataion layer."""
     @staticmethod
     def forward(ctx, indices, values, shape, b):
         assert indices.requires_grad == False
@@ -81,13 +80,10 @@ class SpecialSpmm(nn.Module):
         return SpecialSpmmFunction.apply(indices, values, shape, b)
 
     
-class SpGraphAttentionLayer(nn.Module):
-    """
-    Sparse version GAT layer, similar to https://arxiv.org/abs/1710.10903
-    """
+class EPedigreesAttentionLayer_sparse(nn.Module):
 
     def __init__(self, in_features, out_features, dropout, alpha, concat=True):
-        super(SpGraphAttentionLayer, self).__init__()
+        super(EPedigreesAttentionLayer_sparse, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
         self.alpha = alpha
