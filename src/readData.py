@@ -18,10 +18,10 @@ class ReadData(object):
         attr = []
         for i in attri:
             attr.append(i)
-        self.address = {}   #   map address to a list of study ID
-        self.zip = {}       #   map study ID to a list of zip code
-        self.changeAddress = set()   #   a set of study ID who changed address
-        self.move_moveBack = set()  #   a set of study ID who moved out and moved back afterwards
+        self.address = {}   
+        self.zip = {}       
+        self.changeAddress = set()   
+        self.move_moveBack = set()  
         for i in f:
             item = i.strip().split(',')
             ads = (item[1], item[2], item[3], item[4], item[5])
@@ -427,9 +427,9 @@ class ReadData(object):
         attr = []
         for i in attri:
             attr.append(i)
-        self.accountToID = {}   #   map account to study ID
-        self.account = {}       #   map study ID to account 
-        self.changeAccount = set()  # a set of study ID changed account
+        self.accountToID = {}   
+        self.account = {}       
+        self.changeAccount = set()  
         for i in f:
             item = i.strip().split(',')
             if item[1] in self.accountToID:
