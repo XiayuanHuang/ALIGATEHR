@@ -4,7 +4,7 @@
 ALIGATEHR is a generic framework for learning patient representations, 
 which models predicted family relations using a graph attention network of recurrent neural network (RNN) nodes.
 To further enhance the quality of the learned representations, 
-we additionally integrate a medical ontology of diagnosis codes into the [attention mechanism]([https://arxiv.org/abs/1710.10903]).
+we additionally integrate a medical ontology of diagnosis codes into the [attention mechanism](https://arxiv.org/abs/1710.10903).
 ALIGATEHR is a interpretable model,
 allowing us to quantitatively assess the impact of the health history of family members on the disease risk of a patient.
 The pedigree-based attention mechanism enables ALIGATEHR to capture genetic aspects of diseases using only EHR data as input.
