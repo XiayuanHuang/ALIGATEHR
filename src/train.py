@@ -17,19 +17,22 @@ from utils import load_data, accuracy
 from ALIGATEHR import ALIGATEHR
 
 # Training settings
-parser = argparse.ArgumentParser()
-parser.add_argument('--no-cuda', action='store_true', default=False, help='Disables CUDA training.')
-parser.add_argument('--fastmode', action='store_true', default=False, help='Validate during training pass.')
-parser.add_argument('--sparse', action='store_true', default=False, help='GAT with sparse version or not.')
-parser.add_argument('--seed', type=int, default=72, help='Random seed.')
-parser.add_argument('--epochs', type=int, default=10000, help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default=0.005, help='Initial learning rate.')
-parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
-parser.add_argument('--hidden', type=int, default=8, help='Number of hidden units.')
-parser.add_argument('--nb_heads', type=int, default=8, help='Number of head attentions.')
-parser.add_argument('--dropout', type=float, default=0.6, help='Dropout rate (1 - keep probability).')
-parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
-parser.add_argument('--patience', type=int, default=100, help='Patience')
+parser = argparse.ArgumentParser()  
+parser.add_argument('seq_file', type=str, metavar='<visit_file>', help='The path to the Pickled file containing visit information of patients')
+parser.add_argument('label_file', type=str, metavar='<label_file>', help='The path to the Pickled file containing label information of patients')
+parser.add_argument('tree_file', type=str, metavar='<tree_file>', help='The path to the Pickled files containing the ancestor information of the input medical codes. Only use the prefix and exclude ".level#.pk".')
+parser.add_argument('out_file', metavar='<out_file>', help='The path to the output models. The models will be saved after every epoch')
+parser.add_argument('--embed_file', type=str, default='', help='The path to the Pickled file containing the representation vectors of medical codes. If you are not using medical code representations, do not use this option')
+parser.add_argument('--embed_size', type=int, default=128, help='The dimension size of the visit embedding. If you are providing your own medical code vectors, this value will be automatically decided. (default value: 128)')
+parser.add_argument('--rnn_size', type=int, default=128, help='The dimension size of the hidden layer of the GRU (default value: 128)')
+parser.add_argument('--attention_size', type=int, default=128, help='The dimension size of hidden layer of the MLP that generates the attention weights (default value: 128)')
+parser.add_argument('--batch_size', type=int, default=100, help='The size of a single mini-batch (default value: 100)')
+parser.add_argument('--n_epochs', type=int, default=100, help='The number of training epochs (default value: 100)')
+parser.add_argument('--L2', type=float, default=0.001, help='L2 regularization coefficient for all weights except RNN (default value: 0.001)')
+parser.add_argument('--dropout_rate', type=float, default=0.5, help='Dropout rate used for the hidden layer of RNN (default value: 0.5)')
+parser.add_argument('--log_eps', type=float, default=1e-8, help='A small value to prevent log(0) (default value: 1e-8)')
+parser.add_argument('--verbose', action='store_true', help='Print output after every 100 mini-batches (default false)')
+args = parser.parse_args()
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
@@ -45,7 +48,7 @@ adj, features, labels, idx_train, idx_val, idx_test = load_data()
 
 # Model and optimizer
 
-model = SpGAT(nfeat=features.shape[1], 
+model = ALIGATEHR(nfeat=features.shape[1], 
             nhid=args.hidden, 
             nclass=int(labels.max()) + 1, 
             dropout=args.dropout, 
@@ -95,7 +98,6 @@ def train(epoch):
 
     return loss_val.data.item()
 
-
 def compute_test():
     model.eval()
     output = model(features, adj)
@@ -137,7 +139,6 @@ for file in files:
     if epoch_nb > best_epoch:
         os.remove(file)
 
-print("Optimization Finished!")
 print("Total time elapsed: {:.4f}s".format(time.time() - t_total))
 
 # Restore best model
