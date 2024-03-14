@@ -1,3 +1,9 @@
+#################################################################
+# Code written by Xiayuan Huang (xiayuan.huang@yale.edu)
+# For bug issues, please contact author using the email address
+#################################################################
+
+
 from __future__ import division
 from __future__ import print_function
 
