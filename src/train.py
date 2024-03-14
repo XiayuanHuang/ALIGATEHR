@@ -18,11 +18,11 @@ from ALIGATEHR import ALIGATEHR
 
 # Training settings
 parser = argparse.ArgumentParser()  
-parser.add_argument('seq_file', type=str, metavar='<visit_file>', help='The path to the Pickled file containing visit information of patients')
-parser.add_argument('label_file', type=str, metavar='<label_file>', help='The path to the Pickled file containing label information of patients')
-parser.add_argument('tree_file', type=str, metavar='<tree_file>', help='The path to the Pickled files containing the ancestor information of the input medical codes. Only use the prefix and exclude ".level#.pk".')
+parser.add_argument('seq_file', type=str, metavar='<visit_file>', help='The Pickled file containing visit information of patients')
+parser.add_argument('label_file', type=str, metavar='<label_file>', help='The Pickled file containing label information of patients')
+parser.add_argument('tree_file', type=str, metavar='<tree_file>', help='The Pickled files containing the hierarchy of the input medical codes.')
 parser.add_argument('out_file', metavar='<out_file>', help='The path to the output models. The models will be saved after every epoch')
-parser.add_argument('--embed_file', type=str, default='', help='The path to the Pickled file containing the representation vectors of medical codes. If you are not using medical code representations, do not use this option')
+parser.add_argument('--embed_file', type=str, default='', help='The Pickled file containing the representation vectors of medical codes.')
 parser.add_argument('--embed_size', type=int, default=128, help='The dimension size of the visit embedding. If you are providing your own medical code vectors, this value will be automatically decided. (default value: 128)')
 parser.add_argument('--rnn_size', type=int, default=128, help='The dimension size of the hidden layer of the GRU (default value: 128)')
 parser.add_argument('--attention_size', type=int, default=128, help='The dimension size of hidden layer of the MLP that generates the attention weights (default value: 128)')
