@@ -1,3 +1,8 @@
+#################################################################
+# Code written by Xiayuan Huang (xiayuan.huang@yale.edu)
+# For bug issues, please contact author using the email address
+#################################################################
+
 
 import datetime
 
