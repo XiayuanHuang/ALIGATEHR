@@ -19,5 +19,5 @@ Two attention-based graphs are built wiht attention layer simultaneously for lea
 of each visit is inputted into RNN for disease risk prediction.
 
 
-#### ALIGATEHR Framework
-ALIGATEHR consists of two parallel processes: 1) Construction of pedigree graph: the patient representation h^' aggregates health information from relatives; and 2) Construction of ontology graph: the representation g captures dependencies between diseases. The final representation v_t merges both patient and ontology information to represent a patient’s disease status for each visit. Finally, a series of visits is fed into a neural network model for the risk prediction task.![Figure](Figure.pdf)
+#### ALIGATEHR ![Framework](Figure.pdf)
+ALIGATEHR consists of two parallel processes: 1) Construction of pedigree graph: the patient representation h' aggregates health information from relatives; and 2) Construction of ontology graph: the representation g captures dependencies between diseases. The final representation v_t merges both patient and ontology information to represent a patient’s disease status for each visit. Finally, a series of visits is fed into a neural network model for the risk prediction task.
