@@ -12,7 +12,7 @@ class ReadData(object):
 
         self.data4 = {}
 
-    def readAddress(self, fileName):
+    def readLoc(self, fileName):
         f = open(fileName, 'r')
         attri = f.readline().strip().split(',')
         attr = []
@@ -421,7 +421,7 @@ class ReadData(object):
         f.flush()
         f.close()
 
-    def readAccount(self, fileName):
+    def readAcc(self, fileName):
         f = open(fileName, 'r')
         attri = f.readline().strip().split(',')
         attr = []
