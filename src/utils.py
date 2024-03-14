@@ -1,3 +1,9 @@
+#################################################################
+# Code written by Xiayuan Huang (xiayuan.huang@yale.edu)
+# For bug issues, please contact author using the email address
+#################################################################
+
+
 from sklearn.metrics import jaccard_similarity_score, roc_auc_score, precision_score, f1_score, average_precision_score
 import numpy as np
 import os
